@@ -3,160 +3,652 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WYNR - Sports Betting Intelligence</title>
-    <meta name="description" content="WYNR uses advanced analytics to help you make smarter sports betting decisions.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+    <title>WYNR - Smart Sports Betting Analysis</title>
+    <meta name="description" content="WYNR uses AI-driven analytics to identify value bets and help you make smarter sports betting decisions.">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --purple-500: #8b5cf6;
+            --purple-600: #7c3aed;
+            --purple-700: #6d28d9;
+            --purple-900: #1e1b4b;
+            --dark-bg: #0a0a0f;
+            --dark-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #ffffff;
-            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 24px;
+
+        /* Background gradient */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.3), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124, 58, 237, 0.15), transparent),
+                radial-gradient(ellipse 50% 30% at 20% 80%, rgba(109, 40, 217, 0.1), transparent);
+            pointer-events: none;
+            z-index: -1;
         }
+
+        /* Glass card component */
+        .glass-card {
+            background: var(--dark-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+        }
+
+        /* Header */
         header {
-            text-align: center;
-            margin-bottom: 60px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
         }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 12px 24px;
+        }
+
         .logo {
-            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            background: linear-gradient(135deg, var(--purple-500), var(--purple-600));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 16px;
         }
-        .tagline {
-            font-size: 1.25rem;
-            color: #a0aec0;
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
         }
-        .hero {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .hero p {
-            font-size: 1.1rem;
-            color: #cbd5e0;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        .app-badge {
-            display: inline-block;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #7c3aed, #5b21b6);
-            color: white;
+
+        nav a {
+            color: var(--text-secondary);
             text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .app-badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.4);
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
-        }
-        .feature {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 28px;
-            text-align: center;
-        }
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-        }
-        .feature h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        .feature p {
             font-size: 0.9rem;
-            color: #a0aec0;
-        }
-        footer {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .footer-links {
-            margin-bottom: 20px;
-        }
-        .footer-links a {
-            color: #a0aec0;
-            text-decoration: none;
-            margin: 0 16px;
+            font-weight: 500;
             transition: color 0.2s;
         }
-        .footer-links a:hover {
-            color: #00d4ff;
+
+        nav a:hover {
+            color: var(--text-primary);
         }
-        .copyright {
+
+        .header-badge {
+            height: 40px;
+        }
+
+        .header-badge img {
+            height: 100%;
+            width: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 24px 80px;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 540px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 100px;
+            padding: 8px 16px;
             font-size: 0.85rem;
-            color: #718096;
+            color: var(--purple-500);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--purple-500), var(--purple-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .app-store-btn {
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .app-store-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .app-store-btn img {
+            height: 54px;
+            width: auto;
+        }
+
+        .hero-phones {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Phone mockup */
+        .phone-mockup {
+            position: relative;
+            width: 280px;
+            height: 580px;
+            background: #1a1a1a;
+            border-radius: 45px;
+            padding: 12px;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(139, 92, 246, 0.2);
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 28px;
+            background: #0a0a0a;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 35px;
+            overflow: hidden;
+            background: var(--dark-bg);
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .phone-mockup.secondary {
+            position: absolute;
+            right: -60px;
+            top: 60px;
+            transform: scale(0.85);
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 24px;
+        }
+
+        .features-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 120px;
+        }
+
+        .feature-block:nth-child(even) {
+            direction: rtl;
+        }
+
+        .feature-block:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .feature-content {
+            max-width: 480px;
+        }
+
+        .feature-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .feature-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .feature-phone {
+            display: flex;
+            justify-content: center;
+        }
+
+        .feature-phone .phone-mockup {
+            width: 260px;
+            height: 540px;
+        }
+
+        .feature-phone .phone-mockup::before {
+            width: 90px;
+            height: 26px;
+        }
+
+        .feature-phone .phone-screen {
+            border-radius: 32px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 60px 24px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 60px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .footer-links h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-phones {
+                margin-top: 40px;
+            }
+
+            .phone-mockup.secondary {
+                display: none;
+            }
+
+            .feature-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .feature-block:nth-child(even) {
+                direction: ltr;
+            }
+
+            .feature-content {
+                max-width: 100%;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-brand {
+                max-width: 100%;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner {
+                padding: 10px 16px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .phone-mockup {
+                width: 240px;
+                height: 500px;
+            }
+
+            .feature-content h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">WYNR</div>
-            <p class="tagline">Sports Betting Intelligence</p>
-        </header>
+    <div class="bg-gradient"></div>
 
-        <section class="hero">
-            <h1>Make Smarter Bets with Data-Driven Insights</h1>
-            <p>WYNR analyzes thousands of data points to identify value bets and help you make more informed sports betting decisions.</p>
-            <a href="#" class="app-badge">Download on the App Store</a>
-        </section>
-
-        <section class="features">
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <h3>Advanced Analytics</h3>
-                <p>Powered by ensemble prediction models and real-time odds analysis</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <h3>Value Detection</h3>
-                <p>Automatically identifies bets where the odds are in your favor</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <h3>Real-Time Updates</h3>
-                <p>Live odds tracking across all major sportsbooks</p>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-links">
-                <a href="/privacy.html">Privacy Policy</a>
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <img src="images/logo.png" alt="WYNR" onerror="this.style.display='none'">
+                <span class="logo-text">WYNR</span>
+            </a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/privacy.html">Privacy</a>
                 <a href="/support.html">Support</a>
+            </nav>
+            <a href="#" class="header-badge app-store-btn">
+                <img src="images/app-store-badge.svg" alt="Download on the App Store">
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    </svg>
+                    AI-Powered Sports Analysis
+                </div>
+                <h1>Make Smarter Bets with <span>Data-Driven Picks</span></h1>
+                <p>WYNR analyzes thousands of data points in real-time to identify value bets and help you make more informed sports betting decisions.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="app-store-btn">
+                        <img src="images/app-store-badge.svg" alt="Download on the App Store">
+                    </a>
+                </div>
             </div>
-            <p class="copyright">&copy; 2026 WYNR. All rights reserved.</p>
-        </footer>
-    </div>
+            <div class="hero-phones">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <img src="images/screenshot-analysis.png" alt="WYNR Analysis Screen" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#666;\'>Screenshot</div>'">
+                    </div>
+                </div>
+                <div class="phone-mockup secondary">
+                    <div class="phone-screen">
+                        <img src="images/screenshot-games.png" alt="WYNR Games Screen" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#666;\'>Screenshot</div>'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-inner">
+            <div class="feature-block">
+                <div class="feature-content">
+                    <h2>Follow Live Games</h2>
+                    <p>Get real-time scores and game updates across all major sports. Track multiple games at once and never miss an important play.</p>
+                </div>
+                <div class="feature-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="images/screenshot-games.png" alt="Live Games" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#666;\'>Games</div>'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <h2>Track Your Performance</h2>
+                    <p>View detailed stats, net profit, and win rate. Monitor your 30-day performance and see exactly how your bets are performing.</p>
+                </div>
+                <div class="feature-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="images/screenshot-performance.png" alt="Performance Tracking" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#666;\'>Performance</div>'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <h2>Scan Scoreboards</h2>
+                    <p>Point your camera at any scoreboard and get instant game analysis. Our AI recognizes the game and provides real-time betting insights.</p>
+                </div>
+                <div class="feature-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="images/screenshot-scanner.png" alt="Scoreboard Scanner" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#666;\'>Scanner</div>'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <h2>Smart Game Analysis</h2>
+                    <p>Access win probabilities and AI-driven picks. Our ensemble models analyze odds across sportsbooks to find the best value bets.</p>
+                </div>
+                <div class="feature-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="images/screenshot-analysis.png" alt="Game Analysis" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#666;\'>Analysis</div>'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="/" class="logo">
+                    <img src="images/logo.png" alt="WYNR" onerror="this.style.display='none'">
+                    <span class="logo-text">WYNR</span>
+                </a>
+                <p>Smart sports betting analysis powered by AI. Make data-driven decisions.</p>
+                <a href="#" class="app-store-btn">
+                    <img src="images/app-store-badge.svg" alt="Download on the App Store" style="height: 40px;">
+                </a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/support.html">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/support.html">Contact</a></li>
+                    <li><a href="/support.html">Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WYNR. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Twitter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="TikTok">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
