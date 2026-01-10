@@ -5,24 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support - WYNR</title>
     <meta name="description" content="Get help with WYNR - Contact support, FAQs, and troubleshooting.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --purple-500: #8b5cf6;
+            --purple-600: #7c3aed;
+            --purple-700: #6d28d9;
+            --dark-bg: #0a0a0f;
+            --dark-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.7;
+        }
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.3), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124, 58, 237, 0.15), transparent);
+            pointer-events: none;
+            z-index: -1;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: 40px 24px 60px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+        .back-link svg {
+            width: 20px;
+            height: 20px;
         }
         header {
             text-align: center;
@@ -31,7 +75,7 @@
         .logo {
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            background: linear-gradient(135deg, var(--purple-500), var(--purple-600));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -44,12 +88,12 @@
             margin-bottom: 10px;
         }
         .subtitle {
-            color: #a0aec0;
+            color: var(--text-secondary);
             font-size: 1.1rem;
         }
         .contact-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--dark-card);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 40px;
             text-align: center;
@@ -64,13 +108,13 @@
             margin-bottom: 12px;
         }
         .contact-card p {
-            color: #cbd5e0;
+            color: var(--text-secondary);
             margin-bottom: 20px;
         }
         .email-link {
             display: inline-block;
             padding: 14px 32px;
-            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            background: linear-gradient(135deg, var(--purple-600), var(--purple-700));
             color: white;
             text-decoration: none;
             border-radius: 12px;
@@ -83,8 +127,8 @@
             box-shadow: 0 10px 40px rgba(124, 58, 237, 0.4);
         }
         .faq-section {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--dark-card);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 40px;
         }
@@ -92,10 +136,10 @@
             font-size: 1.5rem;
             margin-bottom: 30px;
             text-align: center;
-            color: #00d4ff;
+            color: var(--purple-500);
         }
         .faq-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-color);
             padding: 20px 0;
         }
         .faq-item:last-child {
@@ -109,14 +153,14 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #ffffff;
+            color: var(--text-primary);
         }
         .faq-answer {
-            color: #a0aec0;
+            color: var(--text-secondary);
             font-size: 0.95rem;
         }
         .faq-answer a {
-            color: #00d4ff;
+            color: var(--purple-500);
             text-decoration: none;
         }
         .faq-answer a:hover {
@@ -126,25 +170,33 @@
             text-align: center;
             margin-top: 50px;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
         }
         .footer-links a {
-            color: #a0aec0;
+            color: var(--text-muted);
             text-decoration: none;
             margin: 0 16px;
         }
         .footer-links a:hover {
-            color: #00d4ff;
+            color: var(--purple-500);
         }
         .copyright {
             font-size: 0.85rem;
-            color: #718096;
+            color: var(--text-muted);
             margin-top: 16px;
         }
     </style>
 </head>
 <body>
+    <div class="bg-gradient"></div>
     <div class="container">
+        <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+
         <header>
             <a href="/" class="logo">WYNR</a>
             <h1>Support</h1>
@@ -201,8 +253,9 @@
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/privacy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms</a>
             </div>
-            <p class="copyright">&copy; 2026 WYNR. All rights reserved.</p>
+            <p class="copyright">&copy; 2025 WYNR LLC. All rights reserved.</p>
         </footer>
     </div>
 </body>
