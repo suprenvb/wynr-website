@@ -416,6 +416,173 @@
         }
 
         /* Mobile Responsive */
+        /* Waitlist Section */
+        .waitlist {
+            padding: 80px 24px;
+        }
+
+        .waitlist-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .waitlist-inner h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .waitlist-inner h2 span {
+            background: linear-gradient(135deg, var(--purple-500), var(--purple-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .waitlist-inner > p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .waitlist-form {
+            padding: 32px;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--purple-500);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        .form-group input.error,
+        .form-group select.error {
+            border-color: #ef4444;
+        }
+
+        .form-error {
+            font-size: 0.8rem;
+            color: #ef4444;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .form-error.visible {
+            display: block;
+        }
+
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #1a1a2e;
+            color: var(--text-primary);
+        }
+
+        .form-hp {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            opacity: 0;
+            height: 0;
+            width: 0;
+            z-index: -1;
+        }
+
+        .waitlist-submit {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--purple-500), var(--purple-600));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .waitlist-submit:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .waitlist-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .waitlist-message {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .waitlist-message.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+
+        .waitlist-message.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+
+        .waitlist-message.info {
+            display: block;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--purple-500);
+        }
+
         @media (max-width: 968px) {
             .hero-inner {
                 grid-template-columns: 1fr;
@@ -468,6 +635,10 @@
             nav {
                 display: none;
             }
+
+            .waitlist-inner h2 {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -486,6 +657,14 @@
 
             .feature-content h2 {
                 font-size: 1.8rem;
+            }
+
+            .waitlist-inner h2 {
+                font-size: 1.6rem;
+            }
+
+            .waitlist-form {
+                padding: 24px 20px;
             }
         }
     </style>
@@ -539,6 +718,45 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="waitlist" id="waitlist">
+        <div class="waitlist-inner">
+            <h2>Get <span>Early Access</span></h2>
+            <p>Join the waitlist to be the first to know when new features drop. We'll text or email you — no spam, ever.</p>
+            <form id="waitlistForm" class="glass-card waitlist-form" novalidate>
+                <div class="form-hp" aria-hidden="true">
+                    <label for="website">Website</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="wl-email">Email</label>
+                    <input type="email" id="wl-email" name="email" placeholder="you@example.com" required autocomplete="email">
+                    <div class="form-error" id="wl-email-error">Please enter a valid email address.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="wl-phone">Phone Number</label>
+                    <input type="tel" id="wl-phone" name="phone" placeholder="(555) 123-4567" required autocomplete="tel">
+                    <div class="form-error" id="wl-phone-error">Please enter a valid phone number (at least 10 digits).</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="wl-bets">Do you currently bet on sports?</label>
+                    <select id="wl-bets" name="bets" required>
+                        <option value="" disabled selected>Select one...</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <div class="form-error" id="wl-bets-error">Please select an option.</div>
+                </div>
+
+                <button type="submit" class="waitlist-submit" id="wl-submit">Join the Waitlist</button>
+
+                <div class="waitlist-message" id="wl-message"></div>
+            </form>
         </div>
     </section>
 
@@ -644,5 +862,169 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        var SUPABASE_URL = 'https://uzbxsgxjhekmafknycla.supabase.co';
+        var SUPABASE_KEY = 'sb_publishable_S-1E62t_CzwZJmyhZ1dRqg_MrqD3sIw';
+        var RATE_LIMIT_MS = 30000;
+
+        var form = document.getElementById('waitlistForm');
+        var submitBtn = document.getElementById('wl-submit');
+        var messageDiv = document.getElementById('wl-message');
+        var emailInput = document.getElementById('wl-email');
+        var phoneInput = document.getElementById('wl-phone');
+        var betsSelect = document.getElementById('wl-bets');
+        var honeypot = document.getElementById('website');
+
+        var rateLimited = false;
+
+        function showError(inputId, show) {
+            var errorDiv = document.getElementById(inputId + '-error');
+            var input = document.getElementById(inputId);
+            if (show) {
+                errorDiv.classList.add('visible');
+                input.classList.add('error');
+            } else {
+                errorDiv.classList.remove('visible');
+                input.classList.remove('error');
+            }
+        }
+
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = 'waitlist-message ' + type;
+        }
+
+        function clearMessage() {
+            messageDiv.className = 'waitlist-message';
+            messageDiv.textContent = '';
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function extractDigits(phone) {
+            return phone.replace(/\D/g, '');
+        }
+
+        function isValidPhone(phone) {
+            return extractDigits(phone).length >= 10;
+        }
+
+        function validate() {
+            var valid = true;
+
+            if (!isValidEmail(emailInput.value.trim())) {
+                showError('wl-email', true);
+                valid = false;
+            } else {
+                showError('wl-email', false);
+            }
+
+            if (!isValidPhone(phoneInput.value.trim())) {
+                showError('wl-phone', true);
+                valid = false;
+            } else {
+                showError('wl-phone', false);
+            }
+
+            if (!betsSelect.value) {
+                showError('wl-bets', true);
+                valid = false;
+            } else {
+                showError('wl-bets', false);
+            }
+
+            return valid;
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearMessage();
+
+            if (honeypot.value) {
+                showMessage("You're on the list! We'll be in touch.", 'success');
+                return;
+            }
+
+            if (rateLimited) {
+                showMessage('Please wait before submitting again.', 'info');
+                return;
+            }
+
+            if (!validate()) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            var payload = {
+                email: emailInput.value.trim().toLowerCase(),
+                phone: extractDigits(phoneInput.value.trim()),
+                bets: betsSelect.value === 'true'
+            };
+
+            fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_KEY,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    showMessage("You're on the list! We'll be in touch soon.", 'success');
+                    form.reset();
+                    showError('wl-email', false);
+                    showError('wl-phone', false);
+                    showError('wl-bets', false);
+
+                    rateLimited = true;
+                    submitBtn.textContent = 'Submitted!';
+                    setTimeout(function() {
+                        rateLimited = false;
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Join the Waitlist';
+                    }, RATE_LIMIT_MS);
+                    return;
+                }
+
+                if (response.status === 409) {
+                    showMessage("You're already on the list! We'll reach out soon.", 'info');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Join the Waitlist';
+                    return;
+                }
+
+                return response.json().then(function(data) {
+                    if (data.code === '23505') {
+                        showMessage("You're already on the list! We'll reach out soon.", 'info');
+                    } else {
+                        showMessage('Something went wrong. Please try again.', 'error');
+                        console.error('Waitlist error:', data);
+                    }
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Join the Waitlist';
+                });
+            })
+            .catch(function(err) {
+                showMessage('Network error. Please check your connection and try again.', 'error');
+                console.error('Waitlist fetch error:', err);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Join the Waitlist';
+            });
+        });
+
+        emailInput.addEventListener('input', function() { showError('wl-email', false); });
+        phoneInput.addEventListener('input', function() { showError('wl-phone', false); });
+        betsSelect.addEventListener('change', function() { showError('wl-bets', false); });
+    })();
+    </script>
 </body>
 </html>
